@@ -7,9 +7,9 @@ const pool = createPool({
     database: "fyp",
 })
 
-class CustomerTable{
-    static storeCustomer({accountId, profilePicture, contact, address}) {
-        const sql = `INSERT INTO customer(profilePicture, contact, address, accountId) VALUES("${profilePicture}", "${contact}", "${address}", ${accountId})`
+class FoodTable{
+    static storeFood({foodName, price, restaurantId}) {
+        const sql = `INSERT INTO food(foodName, price, restaurantId) VALUES("${foodName}", "${price}", ${restaurantId})`
         return new Promise((resolve, reject) => {
             pool.query(
                 sql,
@@ -22,20 +22,20 @@ class CustomerTable{
         });
     }
 
-    static getCustomer({ accountId }) {
-        const sql = `SELECT customerId, profilePicture, contact, address FROM customer
-                     WHERE accountId=${accountId}`
+    static getFood({ restaurantId }) {
+        const sql = `SELECT FoodId,FoodName,Price FROM food
+                     WHERE restaurantId="${restaurantId}"`
         return new Promise((resolve,reject) => {
             pool.query(
                 sql,
                 (error, response) => {
                     if (error) return reject(error);
 
-                    resolve({ customer: response[0] });
+                    resolve({ food: response });
                 }
             );    
         });
     }
 }
 
-module.exports = CustomerTable;
+module.exports = FoodTable;
