@@ -108,15 +108,15 @@ class CartTable {
                 (error, response) => {
                     if (error) return reject(error);
 
-                    resolve({ cart: response[0] });
+                    resolve({ cart: response });
                 }
             );    
         });
     }
 
-    static updateCart({ cartId }) {
+    static cartToOrder({ cartId }) {
         const sql = `UPDATE cart SET ordered=true 
-                     WHERE cartId="${cartId}"`
+                     WHERE cartId=${cartId}`
         return new Promise((resolve, reject) => {
             pool.query(
                 sql,
@@ -124,6 +124,22 @@ class CartTable {
                     if (error) return reject(error);
 
                     resolve();
+                }
+            );
+         });
+    }
+
+    static orderTotal({ cartId }){
+        const sql = `Select cartId, SUM(price*quantity) total from cart_food join food on
+                    cart_food.foodId = food.foodId
+                    where cartId = ${cartId} GROUP BY cartId`
+        return new Promise((resolve, reject) => {
+            pool.query(
+                sql,
+                (error, response) => {
+                    if (error) return reject(error);
+
+                    resolve({ cart: response[0] });
                 }
             );
          });

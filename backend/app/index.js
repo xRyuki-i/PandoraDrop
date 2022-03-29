@@ -7,7 +7,8 @@ const accountRouter = require('./api/account');
 const customerRouter = require('./api/customer');
 const restaurantRouter = require('./api/restaurant');
 const foodRouter = require('./api/food');
-const cartRouter = require('./api/cart')
+const cartRouter = require('./api/cart');
+const orderRouter = require('./api/order');
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.use('/customer', customerRouter);
 app.use('/restaurant', restaurantRouter);
 app.use('/food', foodRouter);
 app.use('/cart', cartRouter);
+app.use('/order', orderRouter);
 
 
 
