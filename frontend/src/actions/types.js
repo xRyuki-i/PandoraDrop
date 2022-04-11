@@ -1,0 +1,7 @@
+// const ACCOUNT = {
+//     FETCH: 'ACCOUNT_FETCH',
+//     FETCH_ERROR: 'ACCOUNT_ERROR',
+//     FETCH_SUCCESS: 'ACCOUNT_SUCCESS'
+// }
+
+// export { ACCOUNT };
